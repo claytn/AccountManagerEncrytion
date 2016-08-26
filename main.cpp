@@ -1,7 +1,5 @@
 #include <iostream>
 #include <cstdlib>
-
-//#include <string>
 #include <vector>
 #include <string>
 #include <fstream>
@@ -52,6 +50,18 @@ bool verify(string a, vector<User> &  b, int & index){
 
 	}
 	return true;
+}
+
+void printAllUsers(vector<User> & a){
+
+	cout << endl << "Current Users:" << endl;
+
+	for(unsigned int i = 0; i < a.size(); i++){
+		if(a[i].getUsername() != "root"){
+		cout << a[i].getUsername() << endl;
+		}
+		
+	}
 }
 
 
@@ -221,8 +231,9 @@ int main(){
 						       cout << endl << endl << "Action Menu" << endl;
 						       cout << "1. Send Message" << endl;
 						       cout << "2. Get Messages" << endl;
-						       cout << "3. Log Out" << endl;
-						       cout << "4. Delete Account" << endl;
+						       cout << "3. View All Users" << endl;
+						       cout << "4. Log Out" << endl;
+						       cout << "5. Delete Account" << endl;
 
 						       cin >> op;
 
@@ -262,10 +273,16 @@ int main(){
 
 									      break;
 								      }
-							       case 3:{
+								case 3:{
+									
+									    	printAllUsers(users);
+										break;
+									
+								}
+							       case 4:{
 									      break;
 								      }
-							       case 4:{
+							       case 5:{
 									      users.erase(users.begin() + getUserIndex(login_Username, users));
 									      break;
 								      }
@@ -279,7 +296,7 @@ int main(){
 
 
 
-					       }while(op != 3 && op !=4);
+					       }while(op != 4 && op !=5);
 				       }
 				       else if(login_Username == "root"){
 
@@ -371,7 +388,7 @@ int main(){
 					       for(unsigned int i  = 0; i < users.size(); i++){
 						       if(users[i].getUsername() != "root"){
 
-						       outputFile << encrypt(users[i].getUsername()) << " " << encrypt(users[i].getPassword()) << " " << encrypt(users[i].message) << endl;
+							       outputFile << encrypt(users[i].getUsername()) << " " << encrypt(users[i].getPassword()) << " " << encrypt(users[i].message) << endl;
 						       }
 
 					       }
